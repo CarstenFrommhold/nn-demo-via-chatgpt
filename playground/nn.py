@@ -80,8 +80,8 @@ for epoch in range(num_epochs):
         W2 -= learning_rate * grad_W2
         b2 -= learning_rate * grad_b2
 
-        # Track the loss
-        losses.append(loss)
+    # Track the loss
+    losses.append(loss)
 
     # Print the loss every 100 epochs
     if epoch % 100 == 0:
@@ -96,21 +96,17 @@ y_pred = np.dot(hidden, W2) + b2
 import pandas as pd
 import seaborn as sns
 
-d = {'x_test': x_test, 'y_test': y_test, 'y_pred': y_pred}
+y_pred_plot = y_pred.reshape(-1,)
+d = {'x_test': x_test, 'y_test': y_test, 'y_pred': y_pred_plot}
 df_plot = pd.DataFrame(d)
 
-d = {'epoch': range(0, num_epochs, 100), 'losses': losses}
+d = {'epoch': [epoch for epoch in range(0, num_epochs)], 'losses': losses}
 df_loss = pd.DataFrame(d)
 
-sns.lineplot(data=df_loss, x="epoch", y="losses")
-plt.show()
 
-
-# # Plot the results
-# plt.plot(x_test, y_test, label="ground truth")
-# plt.plot(x_test, y_pred, label="predicted")
-# plt.legend()
+# sns.lineplot(data=df_loss, x="epoch", y="losses")
 # plt.show()
-
-# plt.plot(range(0, num_epochs, 100), losses[::100])
+#
+# sns.scatterplot(data=df_plot, x="x_test", y="y_test")
+# sns.scatterplot(data=df_plot, x="x_test", y="y_pred")
 # plt.show()
