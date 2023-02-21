@@ -15,6 +15,14 @@ batch_size = st.sidebar.number_input("Batch size", value=DEFAULT_BATCH_SIZE)
 learning_rate = st.sidebar.number_input("Learning rate", value=DEFAULT_LEARNING_RATE)
 num_epochs = st.sidebar.number_input("Number of epochs", value=DEFAULT_NUM_EPOCHS)
 
+def plot_figures_side_by_side(fig1, fig2):
+    fig = plt.figure()
+    ax1 = fig.add_subplot(1, 2, 1)
+    ax2 = fig.add_subplot(1, 2, 2)
+    ax1.imshow(fig1)
+    ax2.imshow(fig2)
+    return fig
+
 # Define a go button to start the app. This will be used to trigger the training.
 if st.sidebar.button("Go for it!"):
     st.write("Training...")
@@ -24,11 +32,13 @@ if st.sidebar.button("Go for it!"):
                                         num_epochs=num_epochs,
                                         hidden_size=hidden_size)
 
-    fig = plt.figure()
-    sns.lineplot(data=df_loss, x="epoch", y="loss")
-    st.pyplot(fig)
+    fig = plt.figure(figsize=(12, 6))
+    ax1 = fig.add_subplot(1, 2, 1)
+    ax2 = fig.add_subplot(1, 2, 2)
+    sns.lineplot(data=df_loss, x="epoch", y="loss", ax=ax1, label="loss")
+#    st.pyplot(fig)
 
-    fig = plt.figure()
-    sns.scatterplot(data=df_plot, x="x_test", y="y_test")
-    sns.scatterplot(data=df_plot, x="x_test", y="y_pred")
+#    fig = plt.figure()
+    sns.scatterplot(data=df_plot, x="x_test", y="y_test", ax=ax2, label="y_test")
+    sns.scatterplot(data=df_plot, x="x_test", y="y_pred", ax=ax2, label="y_pred")
     st.pyplot(fig)
