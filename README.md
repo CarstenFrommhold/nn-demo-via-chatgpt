@@ -14,16 +14,16 @@ So let's build this ...
 
 ### Result
 
-### Looks like this
+#### Looks like this
 
 ![App](img/app.png)
 
-### Medium Post
+#### Medium Post
 
-[Click me](...)
+[Click me](https://medium.com/@carsten.frommhold/build-a-nn-playground-via-chatgpt-dca82d7a4b5)
 
 #### Start App via 
 
 ```python
-streamlit run app.py
+streamlit run src/app.py
 ```
